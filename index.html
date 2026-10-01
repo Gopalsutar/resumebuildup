@@ -7,10 +7,10 @@
   <meta name="description" content="Build stunning, modern, ATS-friendly professional resumes in minutes with live real-time preview and instant PDF download. Built with pure HTML, CSS, and JavaScript.">
   <meta name="keywords" content="resume builder, cv maker, ats resume, free resume generator, job application cv">
   
-  <!-- Google Fonts -->
+  <!-- Google Fonts (Expanded for 100+ Designer Templates) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,300&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
@@ -164,106 +164,77 @@
       </div>
     </header>
 
-    <!-- SECTION: RESUME TEMPLATES CARDS -->
+    <!-- SECTION: 100+ RESUME TEMPLATES EXPLORER HUB -->
     <section class="section-container" id="templates">
       <div class="section-head">
-        <span class="section-badge">TEMPLATES COLLECTION</span>
-        <h2 class="section-main-title">Curated Templates for Every Career Stage</h2>
-        <p class="section-lead">Choose a template tailored to your industry. Each design is optimized for ATS readability and executive visual appeal.</p>
+        <span class="section-badge">100+ DESIGNER TEMPLATES</span>
+        <h2 class="section-main-title">Explore 100+ Modern Resume Templates</h2>
+        <p class="section-lead">Find your ideal design across tech, executive leadership, creative design, and ATS-champion formats. Filter by role, color, and layout.</p>
       </div>
 
-      <div class="templates-grid">
-        
-        <!-- Template Card 1: Modern Clean -->
-        <div class="template-card">
-          <div class="template-ribbon">⭐ Most Popular</div>
-          <div class="template-card-preview">
-            <div class="template-mini-paper">
-              <div class="mini-header">
-                <div class="mini-name">ALEX MORGAN</div>
-                <div class="mini-role">Senior Full Stack Engineer</div>
-              </div>
-              <div class="mini-line" style="width: 90%;"></div>
-              <div class="mini-line" style="width: 75%;"></div>
-              <div class="mini-chip-row">
-                <span class="mini-chip">React</span>
-                <span class="mini-chip">Node.js</span>
-                <span class="mini-chip">TypeScript</span>
-                <span class="mini-chip">AWS</span>
-              </div>
-              <div class="mini-line" style="width: 100%; margin-top: 8px;"></div>
-              <div class="mini-line" style="width: 85%;"></div>
-              <div class="mini-line" style="width: 65%;"></div>
-            </div>
+      <!-- Filter & Search Hub -->
+      <div class="catalog-filter-bar">
+        <div class="catalog-search-row">
+          <div class="catalog-search-wrap">
+            <span class="catalog-search-icon">🔍</span>
+            <input type="text" id="catalogSearchInput" class="catalog-search-input" placeholder="Search 100+ templates (e.g. Silicon Valley, Banker, Minimal, Emerald, AI...)">
           </div>
-          <div class="template-card-info">
-            <h3 class="template-card-title">Modern Clean</h3>
-            <p class="template-card-desc">
-              The flagship choice for software engineers, product managers, and tech leaders. Features structured timeline markers and dynamic skill badges.
-            </p>
-            <button type="button" class="btn btn-primary" onclick="openBuilder('modern')" style="width: 100%;">
-              Use Modern Clean Template →
-            </button>
+
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <label for="catalogSortSelect" style="font-size: 0.8125rem; font-weight: 700; color: var(--text-secondary);">Sort:</label>
+            <select id="catalogSortSelect" class="form-select" style="width: auto; padding: 0.6rem 0.85rem; font-size: 0.825rem;">
+              <option value="popular">Most Popular</option>
+              <option value="ats">Highest ATS Score</option>
+              <option value="new">Newest Arrivals</option>
+            </select>
           </div>
         </div>
 
-        <!-- Template Card 2: Executive Elite -->
-        <div class="template-card">
-          <div class="template-ribbon" style="background: linear-gradient(135deg, #0f766e, #115e59);">🏆 99% ATS Friendly</div>
-          <div class="template-card-preview">
-            <div class="template-mini-paper" style="font-family: serif; text-align: center;">
-              <div class="mini-header" style="border-bottom: 1.5px solid #0f172a;">
-                <div class="mini-name" style="letter-spacing: 1px;">VICTORIA REED</div>
-                <div class="mini-role" style="font-style: italic;">VP of Operations & Finance</div>
-              </div>
-              <div class="mini-line" style="width: 95%; margin: 6px auto;"></div>
-              <div class="mini-line" style="width: 80%; margin: 0 auto;"></div>
-              <div class="mini-line" style="width: 90%; margin: 6px auto;"></div>
-              <div class="mini-line" style="width: 70%; margin: 0 auto;"></div>
-              <div class="mini-line" style="width: 85%; margin: 6px auto;"></div>
-            </div>
-          </div>
-          <div class="template-card-info">
-            <h3 class="template-card-title">Executive Elite</h3>
-            <p class="template-card-desc">
-              Traditional high-density corporate format tailored for executives, bankers, consultants, and management roles where content density matters.
-            </p>
-            <button type="button" class="btn btn-primary" onclick="openBuilder('executive')" style="width: 100%;">
-              Use Executive Elite Template →
-            </button>
-          </div>
+        <!-- Category Tabs -->
+        <div class="catalog-tabs-wrap">
+          <button type="button" class="catalog-tab-btn active" data-cat="all">All Templates (108)</button>
+          <button type="button" class="catalog-tab-btn" data-cat="tech">💻 Tech &amp; Engineering</button>
+          <button type="button" class="catalog-tab-btn" data-cat="executive">👔 Executive &amp; Corporate</button>
+          <button type="button" class="catalog-tab-btn" data-cat="creative">🎨 Creative &amp; Design</button>
+          <button type="button" class="catalog-tab-btn" data-cat="minimal">✨ Modern Minimal</button>
+          <button type="button" class="catalog-tab-btn" data-cat="ats">🏆 ATS Champions</button>
         </div>
 
-        <!-- Template Card 3: Creative Minimal -->
-        <div class="template-card">
-          <div class="template-ribbon" style="background: linear-gradient(135deg, #06b6d4, #0d9488);">🎨 Modern & Punchy</div>
-          <div class="template-card-preview">
-            <div class="template-mini-paper" style="border-top: 4px solid var(--primary);">
-              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
-                <span class="mini-name" style="font-weight: 900;">JORDAN LI</span>
-                <span style="font-size: 6px; color: var(--primary); font-weight: 700;">UI/UX Lead</span>
-              </div>
-              <div class="mini-line" style="width: 100%;"></div>
-              <div class="mini-line" style="width: 88%;"></div>
-              <div class="mini-chip-row" style="margin-top: 4px;">
-                <span class="mini-chip" style="background: #0f172a; color: white;">Figma</span>
-                <span class="mini-chip" style="background: #0f172a; color: white;">Prototyping</span>
-              </div>
-              <div class="mini-line" style="width: 95%; margin-top: 6px;"></div>
-              <div class="mini-line" style="width: 78%;"></div>
+        <!-- Color Swatches & Counter Row -->
+        <div class="catalog-secondary-filters">
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <span style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Palette:</span>
+            <div class="catalog-color-swatches">
+              <span class="catalog-color-filter filter-all active" data-color="all" title="All Colors"></span>
+              <span class="catalog-color-filter" data-color="#0d9488" style="background: #0d9488;" title="Emerald Teal"></span>
+              <span class="catalog-color-filter" data-color="#2563eb" style="background: #2563eb;" title="Sapphire Blue"></span>
+              <span class="catalog-color-filter" data-color="#06b6d4" style="background: #06b6d4;" title="Electric Cyan"></span>
+              <span class="catalog-color-filter" data-color="#7c3aed" style="background: #7c3aed;" title="Royale Violet"></span>
+              <span class="catalog-color-filter" data-color="#dc2626" style="background: #dc2626;" title="Crimson Rose"></span>
+              <span class="catalog-color-filter" data-color="#ea580c" style="background: #ea580c;" title="Coral Sunset"></span>
+              <span class="catalog-color-filter" data-color="#334155" style="background: #334155;" title="Midnight Slate"></span>
+              <span class="catalog-color-filter" data-color="#d97706" style="background: #d97706;" title="Warm Amber"></span>
+              <span class="catalog-color-filter" data-color="#059669" style="background: #059669;" title="Forest Jade"></span>
+              <span class="catalog-color-filter" data-color="#18181b" style="background: #18181b;" title="Carbon Black"></span>
             </div>
           </div>
-          <div class="template-card-info">
-            <h3 class="template-card-title">Creative Minimal</h3>
-            <p class="template-card-desc">
-              A bold, high-contrast design created for creative technologists, designers, and marketing professionals who want their work to stand out.
-            </p>
-            <button type="button" class="btn btn-primary" onclick="openBuilder('creative')" style="width: 100%;">
-              Use Creative Minimal Template →
-            </button>
+
+          <div class="catalog-results-info" id="catalogResultsCounter">
+            Showing 12 of 108 Templates
           </div>
         </div>
+      </div>
 
+      <!-- Dynamic Cards Grid (Rendered via js/template-catalog.js) -->
+      <div class="templates-grid" id="catalogCardsGrid">
+        <!-- Rendered dynamically by TemplateCatalogApp -->
+      </div>
+
+      <!-- Load More Button -->
+      <div style="text-align: center; margin-top: 3rem;">
+        <button type="button" class="btn btn-secondary btn-lg" id="catalogLoadMoreBtn">
+          Load More Templates (96 remaining) ↓
+        </button>
       </div>
     </section>
 
@@ -521,7 +492,7 @@
           <div class="section-body">
             <!-- Profile Avatar Upload -->
             <div class="avatar-upload-box">
-              <img src="" id="avatarPreviewImg" class="avatar-preview-img" alt="Avatar">
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='1.5'><circle cx='12' cy='8' r='4'/><path d='M4 20c0-4 4-6 8-6s8 2 8 6'/></svg>" id="avatarPreviewImg" class="avatar-preview-img" alt="Avatar">
               <div style="flex: 1;">
                 <div style="font-size: 0.8125rem; font-weight: 600; margin-bottom: 0.35rem;">Profile Photo (Optional)</div>
                 <div style="display: flex; gap: 0.5rem; align-items: center;">
@@ -718,12 +689,32 @@
         <!-- Preview Sticky Toolbar -->
         <div class="preview-sticky-header">
           
-          <!-- Template Selection -->
-          <div class="template-selector-group">
-            <span style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Template:</span>
+          <!-- Template Selection & Browse 100+ Button -->
+          <div class="template-selector-group" style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="openTemplateSelectorModal()" style="font-weight: 700; color: var(--primary); border-color: rgba(13, 148, 136, 0.4); background: var(--primary-light);" title="Browse full 108 templates catalog">
+              📁 108+ Templates
+            </button>
             <button type="button" class="template-btn active" data-template="modern">Modern Clean</button>
             <button type="button" class="template-btn" data-template="executive">Executive Elite</button>
             <button type="button" class="template-btn" data-template="creative">Creative Minimal</button>
+            <button type="button" class="template-btn" data-template="tech">Silicon Tech</button>
+            <button type="button" class="template-btn" data-template="split">Nordic Split</button>
+            <button type="button" class="template-btn" data-template="compact">Apex Compact</button>
+          </div>
+
+          <!-- Font Selector -->
+          <div style="display: flex; align-items: center; gap: 0.35rem;">
+            <span style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Font:</span>
+            <select id="resumeFontSelect" class="form-select" style="width: auto; padding: 0.35rem 0.65rem; font-size: 0.775rem; border-radius: var(--radius-sm);">
+              <option value="Plus Jakarta Sans">Plus Jakarta Sans</option>
+              <option value="Outfit">Outfit</option>
+              <option value="Inter">Inter</option>
+              <option value="Poppins">Poppins</option>
+              <option value="Playfair Display">Playfair Display (Serif)</option>
+              <option value="Merriweather">Merriweather (Classic)</option>
+              <option value="Space Grotesk">Space Grotesk (Tech)</option>
+              <option value="Fira Code">Fira Code (Code)</option>
+            </select>
           </div>
 
           <!-- Color Palette Picker -->
@@ -731,10 +722,14 @@
             <span style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Color:</span>
             <span class="color-dot active" data-color="#0d9488" style="background: #0d9488;" title="Emerald Teal"></span>
             <span class="color-dot" data-color="#2563eb" style="background: #2563eb;" title="Sapphire Blue"></span>
+            <span class="color-dot" data-color="#06b6d4" style="background: #06b6d4;" title="Electric Cyan"></span>
             <span class="color-dot" data-color="#7c3aed" style="background: #7c3aed;" title="Royale Violet"></span>
             <span class="color-dot" data-color="#dc2626" style="background: #dc2626;" title="Crimson Rose"></span>
+            <span class="color-dot" data-color="#ea580c" style="background: #ea580c;" title="Coral Sunset"></span>
             <span class="color-dot" data-color="#334155" style="background: #334155;" title="Midnight Slate"></span>
             <span class="color-dot" data-color="#d97706" style="background: #d97706;" title="Warm Amber"></span>
+            <span class="color-dot" data-color="#059669" style="background: #059669;" title="Forest Jade"></span>
+            <span class="color-dot" data-color="#18181b" style="background: #18181b;" title="Carbon Black"></span>
           </div>
 
           <!-- Print & PDF Download Actions -->
@@ -845,10 +840,39 @@
     </div>
   </div>
 
+  <!-- TEMPLATE PREVIEW / SELECTION MODAL -->
+  <div class="modal-overlay" id="templatePreviewModal">
+    <div class="modal-card template-modal-card">
+      <div class="modal-header">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <h3 class="modal-title" id="modalTplTitle">Template Preview</h3>
+            <span class="brand-badge" id="modalTplBadge" style="background: var(--primary); color: white;">Trending</span>
+          </div>
+          <div style="font-size: 0.775rem; color: var(--text-muted); margin-top: 2px;" id="modalTplMeta">Category: TECH • ATS 98%</div>
+        </div>
+        <button type="button" class="modal-close-btn" id="modalPreviewClose" aria-label="Close Preview">&times;</button>
+      </div>
+
+      <div class="template-modal-preview-body">
+        <div id="modalPreviewPaper" class="resume-paper template-modern" style="transform: scale(0.85);">
+          <!-- Live rendered preview -->
+        </div>
+      </div>
+
+      <div style="padding: 1rem 1.5rem; border-top: 1px solid var(--border-light); background: var(--bg-surface); display: flex; justify-content: space-between; align-items: center;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="TemplateCatalogApp.closeModal()">Close Preview</button>
+        <button type="button" class="btn btn-primary btn-sm" id="modalSelectTplBtn">
+          🚀 Apply This Template to My Resume
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toastContainer"></div>
 
-  <!-- App Router & FAQ Handler -->
+  <!-- App Router, FAQ, & Font Handler -->
   <script>
     // View Router (Landing Home vs Builder Workspace)
     function openBuilder(templateName) {
@@ -886,10 +910,25 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function openTemplateSelectorModal() {
+      if (window.TemplateCatalogApp && window.TemplateCatalogApp.templates.length > 0) {
+        window.TemplateCatalogApp.previewModal(window.TemplateCatalogApp.templates[0].id);
+      }
+    }
+
     // Check hash on load
     window.addEventListener('DOMContentLoaded', () => {
       if (window.location.hash === '#builder') {
         openBuilder();
+      }
+
+      // Font Changer
+      const fontSelect = document.getElementById('resumeFontSelect');
+      if (fontSelect) {
+        fontSelect.addEventListener('change', (e) => {
+          document.documentElement.style.setProperty('--resume-font', `'${e.target.value}', sans-serif`);
+          if (window.ResumeApp) window.ResumeApp.render();
+        });
       }
 
       // FAQ Accordion Toggles
@@ -913,6 +952,7 @@
   <!-- Scripts -->
   <script src="js/auth.js"></script>
   <script src="js/templates.js"></script>
+  <script src="js/template-catalog.js"></script>
   <script src="js/export.js"></script>
   <script src="js/app.js"></script>
 

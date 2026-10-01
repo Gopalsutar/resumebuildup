@@ -47,20 +47,26 @@ Ek modern, responsive aur feature-rich **Resume Builder Web Application** jo pur
 
 Aap is project ko kisi bhi modern browser me direct ya lightweight server ke zariye chala sakte hain:
 
-### Option 1: Direct File Open
-`index.html` file par double click karein ya right-click karke Chrome/Edge me open karein.
-
-### Option 2: Live Server / Local Web Server (Recommended)
-Agar aapke paas VS Code hai, toh **Live Server** extension se run karein, ya terminal me:
-
+### Option 1: Standard NPM Command (Sabse Fast & Recommended)
+Terminal me run karein:
 ```bash
-# Using Python
-python -m http.server 3000
-
-# OR using npx serve
-npx serve .
+npm start
+# ya
+npm run dev
 ```
-Fir browser me `http://localhost:3000` kholein.
+Yeh automatically local server start kar dega aur aapka browser `http://localhost:3000` par open kar dega.
+
+### Option 2: 1-Click Windows Launcher
+Folder me maujood **`start-local.bat`** file par double click karein!
+
+### Option 3: Direct Node Server
+Terminal me:
+```bash
+node server.js
+```
+
+### Option 4: Direct Browser Open
+`index.html` file par double click karein ya right-click karke Chrome / Edge me open karein.
 
 ---
 

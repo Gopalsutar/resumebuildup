@@ -1,0 +1,19 @@
+{
+  "name": "resumecraft-pro",
+  "version": "1.0.0",
+  "description": "ResumeCraft Pro - Modern Resume Builder Web Application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "serve": "node server.js"
+  },
+  "keywords": [
+    "resume",
+    "cv",
+    "resume-builder",
+    "ats-resume"
+  ],
+  "author": "CodeHolic",
+  "license": "MIT"
+}
