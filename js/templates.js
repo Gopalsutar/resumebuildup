@@ -5,12 +5,12 @@
 
 const ResumeTemplates = {
   currentTemplate: 'modern',
-  currentAccent: '#2563eb',
+  currentAccent: '#0d9488',
 
-  // Available accent palette
+  // Available accent palette (Teal prioritized)
   colors: [
+    { name: 'Emerald Teal', hex: '#0d9488', light: '#f0fdfa' },
     { name: 'Sapphire Blue', hex: '#2563eb', light: '#eff6ff' },
-    { name: 'Emerald Teal', hex: '#059669', light: '#ecfdf5' },
     { name: 'Royale Violet', hex: '#7c3aed', light: '#f5f3ff' },
     { name: 'Crimson Rose', hex: '#dc2626', light: '#fef2f2' },
     { name: 'Midnight Slate', hex: '#334155', light: '#f8fafc' },
