@@ -1,0 +1,320 @@
+/* ==========================================================================
+   RESUME TEMPLATES STYLESHEET
+   1. Modern Clean (Default)
+   2. Executive Elite (Corporate / Traditional)
+   3. Creative Minimalist (Tech & Design Focused)
+   ========================================================================== */
+
+/* Common Resume Shared Layout */
+.resume-paper {
+  line-height: 1.5;
+  color: #1e293b;
+  font-size: 13px;
+}
+
+.resume-section-title {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  font-size: 12.5px;
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--resume-accent);
+}
+
+.resume-paper a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.resume-paper a:hover {
+  text-decoration: underline;
+  color: var(--resume-accent);
+}
+
+.resume-bullets {
+  list-style-type: disc;
+  margin-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  color: #334155;
+}
+
+/* ==========================================================================
+   TEMPLATE 1: MODERN CLEAN
+   ========================================================================== */
+.template-modern .resume-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 2px solid var(--resume-accent);
+  margin-bottom: 1.25rem;
+}
+
+.template-modern .header-main {
+  flex: 1;
+}
+
+.template-modern .resume-name {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.template-modern .resume-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--resume-accent);
+  margin-bottom: 0.65rem;
+}
+
+.template-modern .contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  font-size: 12px;
+  color: #475569;
+}
+
+.template-modern .contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.template-modern .header-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--resume-accent-light);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.template-modern .resume-body {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.75rem;
+}
+
+.template-modern .timeline-item {
+  position: relative;
+  padding-left: 1rem;
+  border-left: 2px solid #e2e8f0;
+  margin-bottom: 1.1rem;
+}
+
+.template-modern .timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--resume-accent);
+}
+
+.template-modern .item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.2rem;
+}
+
+.template-modern .item-title {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: #0f172a;
+}
+
+.template-modern .item-subtitle {
+  font-weight: 600;
+  font-size: 12.5px;
+  color: var(--resume-accent);
+  margin-bottom: 0.35rem;
+}
+
+.template-modern .item-date {
+  font-size: 11.5px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.template-modern .skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.template-modern .skill-chip {
+  background: var(--resume-accent-light);
+  color: var(--resume-accent);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* ==========================================================================
+   TEMPLATE 2: EXECUTIVE ELITE (Traditional, Clean, High ATS)
+   ========================================================================== */
+.template-executive {
+  font-family: 'Georgia', 'Playfair Display', serif;
+}
+
+.template-executive .resume-header {
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 1.5px solid #0f172a;
+  margin-bottom: 1.25rem;
+}
+
+.template-executive .resume-name {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0f172a;
+  margin-bottom: 0.2rem;
+}
+
+.template-executive .resume-title {
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--resume-accent);
+  margin-bottom: 0.5rem;
+}
+
+.template-executive .contact-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-size: 12px;
+  color: #334155;
+}
+
+.template-executive .header-avatar {
+  display: none; /* Corporate ATS standard */
+}
+
+.template-executive .resume-section-title {
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 0.25rem;
+  font-size: 13px;
+  color: #0f172a;
+  letter-spacing: 0.1em;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.template-executive .timeline-item {
+  margin-bottom: 1rem;
+}
+
+.template-executive .item-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 13.5px;
+}
+
+.template-executive .item-subtitle {
+  font-style: italic;
+  color: #475569;
+  font-size: 12.5px;
+  margin-bottom: 0.35rem;
+}
+
+.template-executive .skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  color: #1e293b;
+}
+
+.template-executive .skill-chip {
+  font-size: 12px;
+  padding: 0.15rem 0.4rem;
+  border-bottom: 1px dotted var(--resume-accent);
+}
+
+/* ==========================================================================
+   TEMPLATE 3: CREATIVE MINIMALIST (Tech, Modern, High Density)
+   ========================================================================== */
+.template-creative {
+  border-top: 6px solid var(--resume-accent);
+  padding-top: 18mm !important;
+}
+
+.template-creative .resume-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.template-creative .resume-name {
+  font-size: 26px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+}
+
+.template-creative .resume-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--resume-accent);
+}
+
+.template-creative .contact-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 11.5px;
+  text-align: right;
+  color: #475569;
+}
+
+.template-creative .resume-section-title {
+  background: var(--resume-accent-light);
+  color: var(--resume-accent);
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-top: 1rem;
+}
+
+.template-creative .timeline-item {
+  background: #f8fafc;
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.75rem;
+  border-left: 3px solid var(--resume-accent);
+}
+
+.template-creative .skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.template-creative .skill-chip {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+}

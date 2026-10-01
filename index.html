@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hi" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,8 +42,9 @@
 
     <div class="nav-actions">
       <!-- Load Sample Data Button -->
-      <button type="button" class="btn btn-secondary btn-sm" id="loadSampleBtn" title="Pre-fill with realistic professional data">
-        ✨ Sample Data
+      <button type="button" class="btn btn-secondary btn-sm nav-btn-text" id="loadSampleBtn" title="Pre-fill with realistic professional data">
+        <span class="btn-text-full">✨ Sample Data</span>
+        <span class="btn-text-short">✨ Sample</span>
       </button>
 
       <!-- Clear Data Button -->
@@ -52,7 +53,7 @@
       </button>
 
       <!-- Theme Switcher -->
-      <button type="button" class="btn-icon" id="themeToggleBtn" aria-label="Toggle Theme" title="Theme change karein">
+      <button type="button" class="btn-icon" id="themeToggleBtn" aria-label="Toggle Theme" title="Toggle Theme">
         🌙
       </button>
 
@@ -63,7 +64,7 @@
           <polyline points="10 17 15 12 10 7"/>
           <line x1="15" y1="12" x2="3" y2="12"/>
         </svg>
-        Sign In / Register
+        <span>Sign In</span>
       </button>
 
       <!-- Auth State: User Menu (Shown when logged in) -->
@@ -134,7 +135,7 @@
                 </label>
                 <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
                 <button type="button" class="btn btn-secondary btn-sm" id="avatarRemoveBtn" style="color: var(--danger);">
-                  Hataayein
+                  Remove
                 </button>
               </div>
             </div>
@@ -143,15 +144,15 @@
           <div class="form-grid">
             <div class="form-group">
               <label for="inputFullName">Full Name *</label>
-              <input type="text" id="inputFullName" class="form-input" placeholder="e.g. Rahul Sharma" autocomplete="name" required>
+              <input type="text" id="inputFullName" class="form-input" placeholder="e.g. Alex Morgan" autocomplete="name" required>
             </div>
             <div class="form-group">
               <label for="inputJobTitle">Professional Title / Headline *</label>
-              <input type="text" id="inputJobTitle" class="form-input" placeholder="e.g. Full Stack Developer" required>
+              <input type="text" id="inputJobTitle" class="form-input" placeholder="e.g. Senior Software Engineer" required>
             </div>
             <div class="form-group">
               <label for="inputEmail">Email Address *</label>
-              <input type="email" id="inputEmail" class="form-input" placeholder="e.g. rahul@example.com" autocomplete="email" required>
+              <input type="email" id="inputEmail" class="form-input" placeholder="e.g. alex.morgan@example.com" autocomplete="email" required>
             </div>
             <div class="form-group">
               <label for="inputPhone">Phone Number</label>
@@ -366,8 +367,8 @@
 
   <!-- Mobile View Toggle (Edit vs Preview for small screens) -->
   <div class="mobile-view-toggle" id="mobileViewToggle">
-    <button type="button" class="mobile-toggle-btn active" id="mobileToggleEdit">✏️ Edit Form</button>
-    <button type="button" class="mobile-toggle-btn" id="mobileTogglePrev">👁️ Live Preview</button>
+    <button type="button" class="mobile-toggle-btn active" id="mobileToggleEdit">✏️ Edit Details</button>
+    <button type="button" class="mobile-toggle-btn" id="mobileTogglePrev">👁️ View Resume</button>
   </div>
 
   <!-- AUTHENTICATION MODAL (Registration & Login) -->
@@ -389,7 +390,7 @@
         <form class="auth-form active" id="loginForm">
           <div class="form-group">
             <label for="loginEmail">Email Address</label>
-            <input type="email" id="loginEmail" class="form-input" placeholder="aapka@email.com" autocomplete="username" required>
+            <input type="email" id="loginEmail" class="form-input" placeholder="you@example.com" autocomplete="username" required>
           </div>
 
           <div class="form-group">
@@ -401,13 +402,13 @@
           </div>
 
           <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
-            Sign In Karo
+            Sign In
           </button>
 
           <!-- Quick Demo User Login Box -->
           <div class="demo-account-box">
             <div>
-              <div class="demo-account-text" style="font-weight: 700;">Direct Demo Test:</div>
+              <div class="demo-account-text" style="font-weight: 700;">Demo Account:</div>
               <div class="demo-account-text">demo@builder.com | password123</div>
             </div>
             <button type="button" class="btn btn-secondary btn-sm" id="demoLoginBtn">
@@ -420,12 +421,12 @@
         <form class="auth-form" id="registerForm">
           <div class="form-group">
             <label for="regName">Full Name</label>
-            <input type="text" id="regName" class="form-input" placeholder="e.g. Rahul Sharma" autocomplete="name" required>
+            <input type="text" id="regName" class="form-input" placeholder="e.g. Alex Morgan" autocomplete="name" required>
           </div>
 
           <div class="form-group">
             <label for="regEmail">Email Address</label>
-            <input type="email" id="regEmail" class="form-input" placeholder="aapka@email.com" autocomplete="username" required>
+            <input type="email" id="regEmail" class="form-input" placeholder="you@example.com" autocomplete="username" required>
           </div>
 
           <div class="form-group">
