@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ResumeCraft Pro - Modern Resume Builder & CV Maker</title>
+  <title>ResumeCraft Pro - Modern Teal Resume Builder & CV Maker</title>
   <meta name="description" content="Build stunning, modern, ATS-friendly professional resumes in minutes with live real-time preview and instant PDF download. Built with pure HTML, CSS, and JavaScript.">
   <meta name="keywords" content="resume builder, cv maker, ats resume, free resume generator, job application cv">
   
@@ -14,6 +14,7 @@
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/landing.css">
   <link rel="stylesheet" href="css/templates.css">
   <link rel="stylesheet" href="css/print.css">
 
@@ -24,7 +25,7 @@
 
   <!-- Top Application Navbar -->
   <nav class="app-navbar" id="appNavbar">
-    <div class="brand-wrapper" id="brandLogo">
+    <div class="brand-wrapper" id="brandLogo" onclick="openHome()">
       <div class="brand-icon">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
@@ -36,30 +37,49 @@
       </div>
       <div>
         <span class="brand-title">ResumeCraft</span>
-        <span class="brand-badge">PRO</span>
+        <span class="brand-badge">TEAL PRO</span>
       </div>
     </div>
 
+    <!-- Center Navigation Links (Visible on Landing Page) -->
+    <div class="nav-links" id="navHomeLinks">
+      <a href="#templates" class="nav-link-item">Templates</a>
+      <a href="#features" class="nav-link-item">Features</a>
+      <a href="#how-it-works" class="nav-link-item">How It Works</a>
+      <a href="#faq" class="nav-link-item">FAQ</a>
+    </div>
+
     <div class="nav-actions">
-      <!-- Load Sample Data Button -->
-      <button type="button" class="btn btn-secondary btn-sm nav-btn-text" id="loadSampleBtn" title="Pre-fill with realistic professional data">
-        <span class="btn-text-full">✨ Sample Data</span>
-        <span class="btn-text-short">✨ Sample</span>
+      <!-- Back to Home Button (Visible in Builder View) -->
+      <button type="button" class="btn btn-secondary btn-sm" id="navBackHomeBtn" style="display: none;" onclick="openHome()">
+        ← Home
       </button>
 
-      <!-- Clear Data Button -->
-      <button type="button" class="btn btn-secondary btn-sm" id="clearFormBtn" title="Reset all form fields">
-        🧹 Reset
-      </button>
+      <!-- Builder Action Buttons (Visible only in Builder View) -->
+      <div id="navBuilderActions" style="display: none; align-items: center; gap: 0.4rem;">
+        <button type="button" class="btn btn-secondary btn-sm nav-btn-text" id="loadSampleBtn" title="Pre-fill with realistic professional data">
+          <span class="btn-text-full">✨ Sample Data</span>
+          <span class="btn-text-short">✨ Sample</span>
+        </button>
+
+        <button type="button" class="btn btn-secondary btn-sm" id="clearFormBtn" title="Reset all form fields">
+          🧹 Reset
+        </button>
+      </div>
 
       <!-- Theme Switcher -->
       <button type="button" class="btn-icon" id="themeToggleBtn" aria-label="Toggle Theme" title="Toggle Theme">
         🌙
       </button>
 
+      <!-- Home View Call-To-Action Button -->
+      <button type="button" class="btn btn-primary btn-sm" id="navBuilderCta" onclick="openBuilder()">
+        🚀 Build Resume
+      </button>
+
       <!-- Auth State: Sign In Button (Shown when logged out) -->
-      <button type="button" class="btn btn-primary btn-sm" id="navAuthBtn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <button type="button" class="btn btn-secondary btn-sm" id="navAuthBtn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
           <polyline points="10 17 15 12 10 7"/>
           <line x1="15" y1="12" x2="3" y2="12"/>
@@ -90,288 +110,667 @@
     </div>
   </nav>
 
-  <!-- Main Dual-Pane Workspace -->
-  <main class="app-container">
-    
-    <!-- LEFT SIDE: Form Editor -->
-    <aside class="editor-sidebar" id="editorSidebar">
-      <div class="editor-header-bar">
-        <h2 class="editor-title">
-          <span>🛠️ Resume Builder</span>
-        </h2>
+  <!-- =========================================================================
+       VIEW 1: STATIC LANDING / HOME PAGE
+       ========================================================================= -->
+  <div id="homeView" class="view-container">
+
+    <!-- HERO SECTION -->
+    <header class="hero-section">
+      <div class="hero-glow-blob"></div>
+
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>✨ 100% Free & ATS-Optimized Resume Builder</span>
+        </div>
+
+        <h1 class="hero-title">
+          Build a Standout Resume that <br>
+          <span class="teal-gradient-text">Lands You Real Interviews.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Design sleek, recruiter-approved resumes in minutes with our interactive builder. 
+          Real-time preview, high-scoring ATS templates, custom Teal theming, and instant pixel-perfect PDF export.
+        </p>
+
+        <div class="hero-cta-group">
+          <button type="button" class="btn btn-primary btn-lg" onclick="openBuilder('modern')" style="font-size: 1.05rem; padding: 0.95rem 1.85rem;">
+            🚀 Build Your Resume Now — Free
+          </button>
+          <a href="#templates" class="btn btn-secondary btn-lg" style="font-size: 1.05rem; padding: 0.95rem 1.85rem;">
+            👁️ Explore Templates
+          </a>
+        </div>
+
+        <div class="hero-stats-row">
+          <div class="hero-stat-item">
+            <span class="stat-number">50,000+</span>
+            <span class="stat-label">Resumes Created</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="stat-number">98%</span>
+            <span class="stat-label">ATS Score Compliance</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="stat-number">30 Sec</span>
+            <span class="stat-label">Quick Setup Time</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Free & Privacy-First</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION: RESUME TEMPLATES CARDS -->
+    <section class="section-container" id="templates">
+      <div class="section-head">
+        <span class="section-badge">TEMPLATES COLLECTION</span>
+        <h2 class="section-main-title">Curated Templates for Every Career Stage</h2>
+        <p class="section-lead">Choose a template tailored to your industry. Each design is optimized for ATS readability and executive visual appeal.</p>
+      </div>
+
+      <div class="templates-grid">
         
-        <div class="quick-toolbar">
-          <button type="button" class="btn btn-secondary btn-sm" id="exportJsonBtn" title="Download data as JSON">
-            📤 Backup JSON
-          </button>
-          <button type="button" class="btn btn-secondary btn-sm" id="importJsonBtn" title="Upload data from JSON">
-            📥 Restore JSON
-          </button>
-          <input type="file" id="importFileInput" accept=".json" style="display: none;">
-        </div>
-      </div>
-
-      <!-- 1. PERSONAL INFORMATION SECTION -->
-      <div class="form-section-card active" id="secPersonal">
-        <div class="section-header">
-          <div class="section-title-wrap">
-            <div class="section-icon-badge">👤</div>
-            <div>
-              <div class="section-title">Personal Information</div>
-              <div class="section-subtitle">Basic details, contact & online profiles</div>
-            </div>
-          </div>
-          <span class="section-chevron">▼</span>
-        </div>
-        <div class="section-body">
-          <!-- Profile Avatar Upload -->
-          <div class="avatar-upload-box">
-            <img src="" id="avatarPreviewImg" class="avatar-preview-img" alt="Avatar">
-            <div style="flex: 1;">
-              <div style="font-size: 0.8125rem; font-weight: 600; margin-bottom: 0.35rem;">Profile Photo (Optional)</div>
-              <div style="display: flex; gap: 0.5rem; align-items: center;">
-                <label for="avatarFileInput" class="btn btn-secondary btn-sm" style="cursor: pointer;">
-                  📷 Upload Photo
-                </label>
-                <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
-                <button type="button" class="btn btn-secondary btn-sm" id="avatarRemoveBtn" style="color: var(--danger);">
-                  Remove
-                </button>
+        <!-- Template Card 1: Modern Clean -->
+        <div class="template-card">
+          <div class="template-ribbon">⭐ Most Popular</div>
+          <div class="template-card-preview">
+            <div class="template-mini-paper">
+              <div class="mini-header">
+                <div class="mini-name">ALEX MORGAN</div>
+                <div class="mini-role">Senior Full Stack Engineer</div>
               </div>
-            </div>
-          </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="inputFullName">Full Name *</label>
-              <input type="text" id="inputFullName" class="form-input" placeholder="e.g. Alex Morgan" autocomplete="name" required>
-            </div>
-            <div class="form-group">
-              <label for="inputJobTitle">Professional Title / Headline *</label>
-              <input type="text" id="inputJobTitle" class="form-input" placeholder="e.g. Senior Software Engineer" required>
-            </div>
-            <div class="form-group">
-              <label for="inputEmail">Email Address *</label>
-              <input type="email" id="inputEmail" class="form-input" placeholder="e.g. alex.morgan@example.com" autocomplete="email" required>
-            </div>
-            <div class="form-group">
-              <label for="inputPhone">Phone Number</label>
-              <input type="tel" id="inputPhone" class="form-input" placeholder="e.g. +91 98765 43210" autocomplete="tel">
-            </div>
-            <div class="form-group">
-              <label for="inputLocation">City, State / Country</label>
-              <input type="text" id="inputLocation" class="form-input" placeholder="e.g. Mumbai, India">
-            </div>
-            <div class="form-group">
-              <label for="inputWebsite">Portfolio Website</label>
-              <input type="url" id="inputWebsite" class="form-input" placeholder="https://rahul.dev">
-            </div>
-            <div class="form-group">
-              <label for="inputLinkedIn">LinkedIn Profile</label>
-              <input type="url" id="inputLinkedIn" class="form-input" placeholder="https://linkedin.com/in/rahul">
-            </div>
-            <div class="form-group">
-              <label for="inputGitHub">GitHub Profile</label>
-              <input type="url" id="inputGitHub" class="form-input" placeholder="https://github.com/rahul">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2. PROFESSIONAL SUMMARY SECTION -->
-      <div class="form-section-card" id="secSummary">
-        <div class="section-header">
-          <div class="section-title-wrap">
-            <div class="section-icon-badge">📝</div>
-            <div>
-              <div class="section-title">Professional Summary</div>
-              <div class="section-subtitle">2-4 impactful lines highlighting your career</div>
-            </div>
-          </div>
-          <span class="section-chevron">▼</span>
-        </div>
-        <div class="section-body">
-          <div class="form-group">
-            <label for="inputSummary">Career Summary / Objective</label>
-            <textarea id="inputSummary" class="form-textarea" rows="4" placeholder="Briefly describe your background, core strengths, and what value you bring..."></textarea>
-            <span class="form-input-help">Tip: Keep it concise, highlighting years of experience and top achievements.</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. WORK EXPERIENCE SECTION -->
-      <div class="form-section-card" id="secExperience">
-        <div class="section-header">
-          <div class="section-title-wrap">
-            <div class="section-icon-badge">💼</div>
-            <div>
-              <div class="section-title">Work Experience</div>
-              <div class="section-subtitle">Employment history, roles & achievements</div>
-            </div>
-          </div>
-          <span class="section-chevron">▼</span>
-        </div>
-        <div class="section-body">
-          <div class="repeater-container" id="experienceContainer">
-            <!-- Dynamic items rendered via JS -->
-          </div>
-          <button type="button" class="btn btn-secondary btn-sm" id="addExperienceBtn" style="width: 100%;">
-            + Add Another Experience
-          </button>
-        </div>
-      </div>
-
-      <!-- 4. EDUCATION SECTION -->
-      <div class="form-section-card" id="secEducation">
-        <div class="section-header">
-          <div class="section-title-wrap">
-            <div class="section-icon-badge">🎓</div>
-            <div>
-              <div class="section-title">Education</div>
-              <div class="section-subtitle">Degrees, colleges & academic achievements</div>
-            </div>
-          </div>
-          <span class="section-chevron">▼</span>
-        </div>
-        <div class="section-body">
-          <div class="repeater-container" id="educationContainer">
-            <!-- Dynamic items rendered via JS -->
-          </div>
-          <button type="button" class="btn btn-secondary btn-sm" id="addEducationBtn" style="width: 100%;">
-            + Add Another Education
-          </button>
-        </div>
-      </div>
-
-      <!-- 5. SKILLS SECTION -->
-      <div class="form-section-card" id="secSkills">
-        <div class="section-header">
-          <div class="section-title-wrap">
-            <div class="section-icon-badge">🛠️</div>
-            <div>
-              <div class="section-title">Skills & Technologies</div>
-              <div class="section-subtitle">Technical skills, tools, frameworks & soft skills</div>
-            </div>
-          </div>
-          <span class="section-chevron">▼</span>
-        </div>
-        <div class="section-body">
-          <div class="skills-input-wrapper">
-            <div class="form-group">
-              <label for="skillInput">Skill Name (Type & press Enter or Comma)</label>
-              <div style="display: flex; gap: 0.5rem;">
-                <input type="text" id="skillInput" class="form-input" placeholder="e.g. JavaScript, React, Python, Docker">
-                <button type="button" class="btn btn-primary btn-sm" id="addSkillBtn">Add</button>
+              <div class="mini-line" style="width: 90%;"></div>
+              <div class="mini-line" style="width: 75%;"></div>
+              <div class="mini-chip-row">
+                <span class="mini-chip">React</span>
+                <span class="mini-chip">Node.js</span>
+                <span class="mini-chip">TypeScript</span>
+                <span class="mini-chip">AWS</span>
               </div>
-            </div>
-            <div class="skills-tags-container" id="skillsTagsContainer">
-              <!-- Dynamic skill chips rendered via JS -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6. PROJECTS SECTION -->
-      <div class="form-section-card" id="secProjects">
-        <div class="section-header">
-          <div class="section-title-wrap">
-            <div class="section-icon-badge">🚀</div>
-            <div>
-              <div class="section-title">Projects</div>
-              <div class="section-subtitle">Key personal, freelance, or open-source projects</div>
+              <div class="mini-line" style="width: 100%; margin-top: 8px;"></div>
+              <div class="mini-line" style="width: 85%;"></div>
+              <div class="mini-line" style="width: 65%;"></div>
             </div>
           </div>
-          <span class="section-chevron">▼</span>
-        </div>
-        <div class="section-body">
-          <div class="repeater-container" id="projectsContainer">
-            <!-- Dynamic items rendered via JS -->
+          <div class="template-card-info">
+            <h3 class="template-card-title">Modern Clean</h3>
+            <p class="template-card-desc">
+              The flagship choice for software engineers, product managers, and tech leaders. Features structured timeline markers and dynamic skill badges.
+            </p>
+            <button type="button" class="btn btn-primary" onclick="openBuilder('modern')" style="width: 100%;">
+              Use Modern Clean Template →
+            </button>
           </div>
-          <button type="button" class="btn btn-secondary btn-sm" id="addProjectBtn" style="width: 100%;">
-            + Add Another Project
-          </button>
         </div>
-      </div>
 
-      <!-- 7. CERTIFICATIONS SECTION -->
-      <div class="form-section-card" id="secCertifications">
-        <div class="section-header">
-          <div class="section-title-wrap">
-            <div class="section-icon-badge">🏆</div>
-            <div>
-              <div class="section-title">Certifications & Awards</div>
-              <div class="section-subtitle">Accreditations, courses & milestones</div>
+        <!-- Template Card 2: Executive Elite -->
+        <div class="template-card">
+          <div class="template-ribbon" style="background: linear-gradient(135deg, #0f766e, #115e59);">🏆 99% ATS Friendly</div>
+          <div class="template-card-preview">
+            <div class="template-mini-paper" style="font-family: serif; text-align: center;">
+              <div class="mini-header" style="border-bottom: 1.5px solid #0f172a;">
+                <div class="mini-name" style="letter-spacing: 1px;">VICTORIA REED</div>
+                <div class="mini-role" style="font-style: italic;">VP of Operations & Finance</div>
+              </div>
+              <div class="mini-line" style="width: 95%; margin: 6px auto;"></div>
+              <div class="mini-line" style="width: 80%; margin: 0 auto;"></div>
+              <div class="mini-line" style="width: 90%; margin: 6px auto;"></div>
+              <div class="mini-line" style="width: 70%; margin: 0 auto;"></div>
+              <div class="mini-line" style="width: 85%; margin: 6px auto;"></div>
             </div>
           </div>
-          <span class="section-chevron">▼</span>
-        </div>
-        <div class="section-body">
-          <div class="repeater-container" id="certificationsContainer">
-            <!-- Dynamic items rendered via JS -->
+          <div class="template-card-info">
+            <h3 class="template-card-title">Executive Elite</h3>
+            <p class="template-card-desc">
+              Traditional high-density corporate format tailored for executives, bankers, consultants, and management roles where content density matters.
+            </p>
+            <button type="button" class="btn btn-primary" onclick="openBuilder('executive')" style="width: 100%;">
+              Use Executive Elite Template →
+            </button>
           </div>
-          <button type="button" class="btn btn-secondary btn-sm" id="addCertBtn" style="width: 100%;">
-            + Add Another Certification
-          </button>
-        </div>
-      </div>
-
-    </aside>
-
-    <!-- RIGHT SIDE: Live Resume Preview Canvas -->
-    <section class="preview-panel" id="previewPanel">
-      
-      <!-- Preview Sticky Toolbar -->
-      <div class="preview-sticky-header">
-        
-        <!-- Template Selection -->
-        <div class="template-selector-group">
-          <span style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Template:</span>
-          <button type="button" class="template-btn active" data-template="modern">Modern Clean</button>
-          <button type="button" class="template-btn" data-template="executive">Executive Elite</button>
-          <button type="button" class="template-btn" data-template="creative">Creative Minimal</button>
         </div>
 
-        <!-- Color Palette Picker -->
-        <div class="color-picker-group">
-          <span style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Color:</span>
-          <span class="color-dot active" data-color="#2563eb" style="background: #2563eb;" title="Sapphire Blue"></span>
-          <span class="color-dot" data-color="#059669" style="background: #059669;" title="Emerald Teal"></span>
-          <span class="color-dot" data-color="#7c3aed" style="background: #7c3aed;" title="Royale Violet"></span>
-          <span class="color-dot" data-color="#dc2626" style="background: #dc2626;" title="Crimson Rose"></span>
-          <span class="color-dot" data-color="#334155" style="background: #334155;" title="Midnight Slate"></span>
-          <span class="color-dot" data-color="#d97706" style="background: #d97706;" title="Warm Amber"></span>
-        </div>
-
-        <!-- Print & PDF Download Actions -->
-        <div class="preview-export-group">
-          <button type="button" class="btn btn-secondary btn-sm" id="printResumeBtn" title="Browser Print (Ctrl+P)">
-            🖨️ Print
-          </button>
-          <button type="button" class="btn btn-primary btn-sm" id="downloadPdfBtn" title="Download direct PDF file">
-            📥 Download PDF
-          </button>
+        <!-- Template Card 3: Creative Minimal -->
+        <div class="template-card">
+          <div class="template-ribbon" style="background: linear-gradient(135deg, #06b6d4, #0d9488);">🎨 Modern & Punchy</div>
+          <div class="template-card-preview">
+            <div class="template-mini-paper" style="border-top: 4px solid var(--primary);">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span class="mini-name" style="font-weight: 900;">JORDAN LI</span>
+                <span style="font-size: 6px; color: var(--primary); font-weight: 700;">UI/UX Lead</span>
+              </div>
+              <div class="mini-line" style="width: 100%;"></div>
+              <div class="mini-line" style="width: 88%;"></div>
+              <div class="mini-chip-row" style="margin-top: 4px;">
+                <span class="mini-chip" style="background: #0f172a; color: white;">Figma</span>
+                <span class="mini-chip" style="background: #0f172a; color: white;">Prototyping</span>
+              </div>
+              <div class="mini-line" style="width: 95%; margin-top: 6px;"></div>
+              <div class="mini-line" style="width: 78%;"></div>
+            </div>
+          </div>
+          <div class="template-card-info">
+            <h3 class="template-card-title">Creative Minimal</h3>
+            <p class="template-card-desc">
+              A bold, high-contrast design created for creative technologists, designers, and marketing professionals who want their work to stand out.
+            </p>
+            <button type="button" class="btn btn-primary" onclick="openBuilder('creative')" style="width: 100%;">
+              Use Creative Minimal Template →
+            </button>
+          </div>
         </div>
 
       </div>
-
-      <!-- A4 Paper Representation Canvas -->
-      <div class="resume-paper-wrapper">
-        <div class="resume-paper template-modern" id="resumePaper">
-          <!-- Real-time rendered resume contents -->
-        </div>
-      </div>
-
     </section>
 
-  </main>
+    <!-- SECTION: FEATURE HIGHLIGHTS -->
+    <section class="section-container" id="features" style="background: var(--bg-surface); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+      <div class="section-head">
+        <span class="section-badge">BUILT FOR SPEED & SUCCESS</span>
+        <h2 class="section-main-title">Why Professionals Choose ResumeCraft</h2>
+        <p class="section-lead">Everything you need to craft an impressive resume without the hassle of broken formatting or hidden subscription fees.</p>
+      </div>
 
-  <!-- Mobile View Toggle (Edit vs Preview for small screens) -->
-  <div class="mobile-view-toggle" id="mobileViewToggle">
-    <button type="button" class="mobile-toggle-btn active" id="mobileToggleEdit">✏️ Edit Details</button>
-    <button type="button" class="mobile-toggle-btn" id="mobileTogglePrev">👁️ View Resume</button>
+      <div class="features-grid">
+        
+        <div class="feature-box">
+          <div class="feature-icon-wrap">⚡</div>
+          <h3 class="feature-title">Real-Time Live Sync</h3>
+          <p class="feature-desc">Watch your resume update instantaneously as you type. What you see is precisely what gets exported onto your PDF.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrap">🎯</div>
+          <h3 class="feature-title">98% ATS Pass Rate</h3>
+          <p class="feature-desc">Engineered with semantic headings and parseable typography to glide through Applicant Tracking Systems effortlessly.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrap">📥</div>
+          <h3 class="feature-title">One-Click PDF Export</h3>
+          <p class="feature-desc">Download high-resolution, vector-crisp A4 PDFs directly in your browser with zero watermarks or annoying delays.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrap">🎨</div>
+          <h3 class="feature-title">Custom Teal & Color Palettes</h3>
+          <p class="feature-desc">Switch accents and themes effortlessly to match your personal brand or target industry tone.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrap">🔒</div>
+          <h3 class="feature-title">100% Privacy & Auto-Save</h3>
+          <p class="feature-desc">Your resume data is stored securely in your browser's LocalStorage. No third-party data tracking, ever.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrap">📱</div>
+          <h3 class="feature-title">Fully Mobile Responsive</h3>
+          <p class="feature-desc">Edit on your phone during your commute or on your desktop at home. Seamless responsive experience across all screen sizes.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: HOW IT WORKS (3 SIMPLE STEPS) -->
+    <section class="section-container" id="how-it-works">
+      <div class="section-head">
+        <span class="section-badge">3-STEP WORKFLOW</span>
+        <h2 class="section-main-title">Create Your Resume in 3 Simple Steps</h2>
+        <p class="section-lead">No complicated word processors or tedious layout adjustments. Just straightforward, high-speed resume creation.</p>
+      </div>
+
+      <div class="steps-row">
+        
+        <div class="step-card">
+          <div class="step-number-bubble">1</div>
+          <h3 class="step-title">Select Your Template</h3>
+          <p class="step-desc">Pick from our Modern, Executive, or Creative templates tailored to your target industry.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number-bubble">2</div>
+          <h3 class="step-title">Fill In Your Details</h3>
+          <p class="step-desc">Use intuitive repeaters to add your work history, degrees, skills, and projects with real-time preview.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number-bubble">3</div>
+          <h3 class="step-title">Download & Apply</h3>
+          <p class="step-desc">Click Download PDF or Print and submit your job application with 100% confidence.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: TESTIMONIALS -->
+    <section class="section-container" style="background: var(--bg-surface); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+      <div class="section-head">
+        <span class="section-badge">SUCCESS STORIES</span>
+        <h2 class="section-main-title">Loved by Candidates Worldwide</h2>
+        <p class="section-lead">See how job seekers accelerated their hiring process using our builder.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"I created my resume in under 10 minutes and received 3 interview calls the following week. The Executive Elite template passed ATS screening with flying colors!"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">SR</div>
+            <div>
+              <div class="testi-meta-name">Sarah Robinson</div>
+              <div class="testi-meta-role">Product Manager at FinTech</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"The real-time live preview is unbelievable. You never have to worry about broken page breaks or margin misalignments. The PDF export is crystal clear."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">DK</div>
+            <div>
+              <div class="testi-meta-name">Devin Kumar</div>
+              <div class="testi-meta-role">Senior Software Engineer</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Finally, a resume builder that is completely free without asking for a credit card when you hit download! The new Teal theme looks incredibly modern."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">EL</div>
+            <div>
+              <div class="testi-meta-name">Elena Lopez</div>
+              <div class="testi-meta-role">Marketing & Growth Lead</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: FAQ ACCORDION -->
+    <section class="section-container" id="faq">
+      <div class="section-head">
+        <span class="section-badge">FREQUENTLY ASKED QUESTIONS</span>
+        <h2 class="section-main-title">Got Questions? We Have Answers.</h2>
+        <p class="section-lead">Everything you need to know about our resume builder platform.</p>
+      </div>
+
+      <div class="faq-wrap">
+        
+        <div class="faq-item active">
+          <div class="faq-question">
+            <span>Is this resume builder truly 100% free?</span>
+            <span class="faq-chevron">▼</span>
+          </div>
+          <div class="faq-answer">
+            Yes! You can create, edit, save, and download unlimited PDF resumes without paying a single dollar. There are no paywalls or trial periods.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Are these resume templates ATS friendly?</span>
+            <span class="faq-chevron">▼</span>
+          </div>
+          <div class="faq-answer">
+            Absolutely. All templates are built using standard semantic hierarchy, clean parseable text, and recruiter-standard typography to ensure high ATS compatibility.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Will I lose my data if I refresh the page?</span>
+            <span class="faq-chevron">▼</span>
+          </div>
+          <div class="faq-answer">
+            No. Your working resume is automatically saved to your browser's LocalStorage as a draft. You can also back up your data as a JSON file or create a free account to save it.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Can I customize the resume colors and fonts?</span>
+            <span class="faq-chevron">▼</span>
+          </div>
+          <div class="faq-answer">
+            Yes! You can choose from 6 curated color accents (including our signature Emerald Teal, Sapphire Blue, and Royale Violet) and switch between 3 distinct layouts at any time.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: BOTTOM CTA BANNER -->
+    <section class="section-container" style="padding-top: 1rem;">
+      <div class="cta-banner-box">
+        <h2 class="cta-banner-title">Ready to Land Your Next Big Opportunity?</h2>
+        <p class="cta-banner-subtitle">Join thousands of job seekers who built professional resumes and landed their dream roles.</p>
+        <button type="button" class="btn btn-cta-white btn-lg" onclick="openBuilder('modern')" style="padding: 1rem 2.25rem; font-size: 1.1rem;">
+          🚀 Start Building Your Resume Now
+        </button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="app-footer">
+      <div class="footer-inner">
+        <div>
+          <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.25rem;">ResumeCraft Pro</div>
+          <div class="footer-copy">© 2026 ResumeCraft Pro. Crafted with precision for career growth.</div>
+        </div>
+
+        <div class="footer-nav">
+          <a href="#templates" class="nav-link-item">Templates</a>
+          <a href="#features" class="nav-link-item">Features</a>
+          <a href="#how-it-works" class="nav-link-item">How It Works</a>
+          <a href="#faq" class="nav-link-item">FAQ</a>
+          <a href="javascript:void(0)" onclick="openBuilder()" class="nav-link-item" style="color: var(--primary); font-weight: 700;">Launch Builder ↗</a>
+        </div>
+      </div>
+    </footer>
+
   </div>
 
-  <!-- AUTHENTICATION MODAL (Registration & Login) -->
+
+  <!-- =========================================================================
+       VIEW 2: DUAL-PANE RESUME BUILDER WORKSPACE
+       ========================================================================= -->
+  <div id="builderView" class="view-container hidden">
+
+    <main class="app-container">
+      
+      <!-- LEFT SIDE: Form Editor -->
+      <aside class="editor-sidebar" id="editorSidebar">
+        <div class="editor-header-bar">
+          <h2 class="editor-title">
+            <span>🛠️ Resume Builder</span>
+          </h2>
+          
+          <div class="quick-toolbar">
+            <button type="button" class="btn btn-secondary btn-sm" id="exportJsonBtn" title="Download data as JSON">
+              📤 Backup JSON
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="importJsonBtn" title="Upload data from JSON">
+              📥 Restore JSON
+            </button>
+            <input type="file" id="importFileInput" accept=".json" style="display: none;">
+          </div>
+        </div>
+
+        <!-- 1. PERSONAL INFORMATION SECTION -->
+        <div class="form-section-card active" id="secPersonal">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <div class="section-icon-badge">👤</div>
+              <div>
+                <div class="section-title">Personal Information</div>
+                <div class="section-subtitle">Basic details, contact & online profiles</div>
+              </div>
+            </div>
+            <span class="section-chevron">▼</span>
+          </div>
+          <div class="section-body">
+            <!-- Profile Avatar Upload -->
+            <div class="avatar-upload-box">
+              <img src="" id="avatarPreviewImg" class="avatar-preview-img" alt="Avatar">
+              <div style="flex: 1;">
+                <div style="font-size: 0.8125rem; font-weight: 600; margin-bottom: 0.35rem;">Profile Photo (Optional)</div>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                  <label for="avatarFileInput" class="btn btn-secondary btn-sm" style="cursor: pointer;">
+                    📷 Upload Photo
+                  </label>
+                  <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+                  <button type="button" class="btn btn-secondary btn-sm" id="avatarRemoveBtn" style="color: var(--danger);">
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="inputFullName">Full Name *</label>
+                <input type="text" id="inputFullName" class="form-input" placeholder="e.g. Alex Morgan" autocomplete="name" required>
+              </div>
+              <div class="form-group">
+                <label for="inputJobTitle">Professional Title / Headline *</label>
+                <input type="text" id="inputJobTitle" class="form-input" placeholder="e.g. Senior Software Engineer" required>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail">Email Address *</label>
+                <input type="email" id="inputEmail" class="form-input" placeholder="e.g. alex.morgan@example.com" autocomplete="email" required>
+              </div>
+              <div class="form-group">
+                <label for="inputPhone">Phone Number</label>
+                <input type="tel" id="inputPhone" class="form-input" placeholder="e.g. +91 98765 43210" autocomplete="tel">
+              </div>
+              <div class="form-group">
+                <label for="inputLocation">City, State / Country</label>
+                <input type="text" id="inputLocation" class="form-input" placeholder="e.g. Bengaluru, India">
+              </div>
+              <div class="form-group">
+                <label for="inputWebsite">Portfolio Website</label>
+                <input type="url" id="inputWebsite" class="form-input" placeholder="https://alex.dev">
+              </div>
+              <div class="form-group">
+                <label for="inputLinkedIn">LinkedIn Profile</label>
+                <input type="url" id="inputLinkedIn" class="form-input" placeholder="https://linkedin.com/in/alex">
+              </div>
+              <div class="form-group">
+                <label for="inputGitHub">GitHub Profile</label>
+                <input type="url" id="inputGitHub" class="form-input" placeholder="https://github.com/alex">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. PROFESSIONAL SUMMARY SECTION -->
+        <div class="form-section-card" id="secSummary">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <div class="section-icon-badge">📝</div>
+              <div>
+                <div class="section-title">Professional Summary</div>
+                <div class="section-subtitle">2-4 impactful lines highlighting your career</div>
+              </div>
+            </div>
+            <span class="section-chevron">▼</span>
+          </div>
+          <div class="section-body">
+            <div class="form-group">
+              <label for="inputSummary">Career Summary / Objective</label>
+              <textarea id="inputSummary" class="form-textarea" rows="4" placeholder="Briefly describe your background, core strengths, and what value you bring..."></textarea>
+              <span class="form-input-help">Tip: Keep it concise, highlighting years of experience and top achievements.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. WORK EXPERIENCE SECTION -->
+        <div class="form-section-card" id="secExperience">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <div class="section-icon-badge">💼</div>
+              <div>
+                <div class="section-title">Work Experience</div>
+                <div class="section-subtitle">Employment history, roles & achievements</div>
+              </div>
+            </div>
+            <span class="section-chevron">▼</span>
+          </div>
+          <div class="section-body">
+            <div class="repeater-container" id="experienceContainer">
+              <!-- Dynamic items rendered via JS -->
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="addExperienceBtn" style="width: 100%;">
+              + Add Another Experience
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. EDUCATION SECTION -->
+        <div class="form-section-card" id="secEducation">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <div class="section-icon-badge">🎓</div>
+              <div>
+                <div class="section-title">Education</div>
+                <div class="section-subtitle">Degrees, colleges & academic achievements</div>
+              </div>
+            </div>
+            <span class="section-chevron">▼</span>
+          </div>
+          <div class="section-body">
+            <div class="repeater-container" id="educationContainer">
+              <!-- Dynamic items rendered via JS -->
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="addEducationBtn" style="width: 100%;">
+              + Add Another Education
+            </button>
+          </div>
+        </div>
+
+        <!-- 5. SKILLS SECTION -->
+        <div class="form-section-card" id="secSkills">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <div class="section-icon-badge">🛠️</div>
+              <div>
+                <div class="section-title">Skills & Technologies</div>
+                <div class="section-subtitle">Technical skills, tools, frameworks & soft skills</div>
+              </div>
+            </div>
+            <span class="section-chevron">▼</span>
+          </div>
+          <div class="section-body">
+            <div class="skills-input-wrapper">
+              <div class="form-group">
+                <label for="skillInput">Skill Name (Type & press Enter or Comma)</label>
+                <div style="display: flex; gap: 0.5rem;">
+                  <input type="text" id="skillInput" class="form-input" placeholder="e.g. JavaScript, React, Python, Docker">
+                  <button type="button" class="btn btn-primary btn-sm" id="addSkillBtn">Add</button>
+                </div>
+              </div>
+              <div class="skills-tags-container" id="skillsTagsContainer">
+                <!-- Dynamic skill chips rendered via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. PROJECTS SECTION -->
+        <div class="form-section-card" id="secProjects">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <div class="section-icon-badge">🚀</div>
+              <div>
+                <div class="section-title">Projects</div>
+                <div class="section-subtitle">Key personal, freelance, or open-source projects</div>
+              </div>
+            </div>
+            <span class="section-chevron">▼</span>
+          </div>
+          <div class="section-body">
+            <div class="repeater-container" id="projectsContainer">
+              <!-- Dynamic items rendered via JS -->
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="addProjectBtn" style="width: 100%;">
+              + Add Another Project
+            </button>
+          </div>
+        </div>
+
+        <!-- 7. CERTIFICATIONS SECTION -->
+        <div class="form-section-card" id="secCertifications">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <div class="section-icon-badge">🏆</div>
+              <div>
+                <div class="section-title">Certifications & Awards</div>
+                <div class="section-subtitle">Accreditations, courses & milestones</div>
+              </div>
+            </div>
+            <span class="section-chevron">▼</span>
+          </div>
+          <div class="section-body">
+            <div class="repeater-container" id="certificationsContainer">
+              <!-- Dynamic items rendered via JS -->
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="addCertBtn" style="width: 100%;">
+              + Add Another Certification
+            </button>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- RIGHT SIDE: Live Resume Preview Canvas -->
+      <section class="preview-panel" id="previewPanel">
+        
+        <!-- Preview Sticky Toolbar -->
+        <div class="preview-sticky-header">
+          
+          <!-- Template Selection -->
+          <div class="template-selector-group">
+            <span style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Template:</span>
+            <button type="button" class="template-btn active" data-template="modern">Modern Clean</button>
+            <button type="button" class="template-btn" data-template="executive">Executive Elite</button>
+            <button type="button" class="template-btn" data-template="creative">Creative Minimal</button>
+          </div>
+
+          <!-- Color Palette Picker -->
+          <div class="color-picker-group">
+            <span style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Color:</span>
+            <span class="color-dot active" data-color="#0d9488" style="background: #0d9488;" title="Emerald Teal"></span>
+            <span class="color-dot" data-color="#2563eb" style="background: #2563eb;" title="Sapphire Blue"></span>
+            <span class="color-dot" data-color="#7c3aed" style="background: #7c3aed;" title="Royale Violet"></span>
+            <span class="color-dot" data-color="#dc2626" style="background: #dc2626;" title="Crimson Rose"></span>
+            <span class="color-dot" data-color="#334155" style="background: #334155;" title="Midnight Slate"></span>
+            <span class="color-dot" data-color="#d97706" style="background: #d97706;" title="Warm Amber"></span>
+          </div>
+
+          <!-- Print & PDF Download Actions -->
+          <div class="preview-export-group">
+            <button type="button" class="btn btn-secondary btn-sm" id="printResumeBtn" title="Browser Print (Ctrl+P)">
+              🖨️ Print
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" id="downloadPdfBtn" title="Download direct PDF file">
+              📥 Download PDF
+            </button>
+          </div>
+
+        </div>
+
+        <!-- A4 Paper Representation Canvas -->
+        <div class="resume-paper-wrapper">
+          <div class="resume-paper template-modern" id="resumePaper">
+            <!-- Real-time rendered resume contents -->
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Mobile View Toggle (Edit vs Preview for small screens) -->
+    <div class="mobile-view-toggle" id="mobileViewToggle">
+      <button type="button" class="mobile-toggle-btn active" id="mobileToggleEdit">✏️ Edit Details</button>
+      <button type="button" class="mobile-toggle-btn" id="mobileTogglePrev">👁️ View Resume</button>
+    </div>
+
+  </div>
+
+  <!-- =========================================================================
+       AUTHENTICATION MODAL (Registration & Login)
+       ========================================================================= -->
   <div class="modal-overlay" id="authModal">
     <div class="modal-card">
       <div class="modal-header">
@@ -448,6 +847,68 @@
 
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toastContainer"></div>
+
+  <!-- App Router & FAQ Handler -->
+  <script>
+    // View Router (Landing Home vs Builder Workspace)
+    function openBuilder(templateName) {
+      document.getElementById('homeView').classList.add('hidden');
+      document.getElementById('builderView').classList.remove('hidden');
+      document.getElementById('navBackHomeBtn').style.display = 'inline-flex';
+      document.getElementById('navHomeLinks').style.display = 'none';
+      document.getElementById('navBuilderCta').style.display = 'none';
+      document.getElementById('navBuilderActions').style.display = 'flex';
+      
+      if (templateName && window.ResumeTemplates) {
+        window.ResumeTemplates.setTemplate(templateName);
+        document.querySelectorAll('.template-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.template === templateName);
+        });
+      }
+
+      if (window.ResumeApp) {
+        window.ResumeApp.render();
+      }
+
+      window.location.hash = 'builder';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openHome() {
+      document.getElementById('homeView').classList.remove('hidden');
+      document.getElementById('builderView').classList.add('hidden');
+      document.getElementById('navBackHomeBtn').style.display = 'none';
+      document.getElementById('navHomeLinks').style.display = 'flex';
+      document.getElementById('navBuilderCta').style.display = 'inline-flex';
+      document.getElementById('navBuilderActions').style.display = 'none';
+
+      window.location.hash = 'home';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Check hash on load
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.location.hash === '#builder') {
+        openBuilder();
+      }
+
+      // FAQ Accordion Toggles
+      document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+          const item = q.parentElement;
+          item.classList.toggle('active');
+        });
+      });
+    });
+
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash === '#builder') {
+        openBuilder();
+      } else if (window.location.hash === '#home' || window.location.hash === '') {
+        openHome();
+      }
+    });
+  </script>
 
   <!-- Scripts -->
   <script src="js/auth.js"></script>
