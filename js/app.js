@@ -164,7 +164,7 @@ class ResumeBuilderApp {
         const file = e.target.files[0];
         if (file) {
           if (file.size > 2 * 1024 * 1024) {
-            showToast('Photo size 2MB se kam hona chahiye.', 'error');
+            showToast('Image size must be less than 2MB.', 'error');
             return;
           }
           const reader = new FileReader();
@@ -174,7 +174,7 @@ class ResumeBuilderApp {
             if (avatarImg) avatarImg.src = dataUrl;
             this.saveDraft();
             this.render();
-            showToast('Profile photo update ho gayi!', 'success');
+            showToast('Profile photo updated successfully!', 'success');
           };
           reader.readAsDataURL(file);
         }
@@ -190,7 +190,7 @@ class ResumeBuilderApp {
         }
         this.saveDraft();
         this.render();
-        showToast('Photo hata di gayi.', 'info');
+        showToast('Profile photo removed.', 'info');
       });
     }
   }
@@ -572,7 +572,7 @@ class ResumeBuilderApp {
     const btn = document.getElementById('themeToggleBtn');
     if (btn) {
       btn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
-      btn.title = theme === 'dark' ? 'Light Mode me badlein' : 'Dark Mode me badlein';
+      btn.title = theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
     }
   }
 
@@ -583,12 +583,31 @@ class ResumeBuilderApp {
     const editor = document.getElementById('editorSidebar');
     const preview = document.getElementById('previewPanel');
 
+    const updateMobileView = () => {
+      if (window.innerWidth <= 1024) {
+        if (prevBtn && prevBtn.classList.contains('active')) {
+          if (editor) editor.classList.add('mobile-hidden');
+          if (preview) preview.classList.remove('mobile-hidden');
+        } else {
+          if (editor) editor.classList.remove('mobile-hidden');
+          if (preview) preview.classList.add('mobile-hidden');
+        }
+      } else {
+        if (editor) editor.classList.remove('mobile-hidden');
+        if (preview) preview.classList.remove('mobile-hidden');
+      }
+    };
+
+    updateMobileView();
+    window.addEventListener('resize', updateMobileView);
+
     if (editBtn && prevBtn && editor && preview) {
       editBtn.addEventListener('click', () => {
         editBtn.classList.add('active');
         prevBtn.classList.remove('active');
         editor.classList.remove('mobile-hidden');
         preview.classList.add('mobile-hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
       prevBtn.addEventListener('click', () => {
@@ -596,6 +615,7 @@ class ResumeBuilderApp {
         editBtn.classList.remove('active');
         editor.classList.add('mobile-hidden');
         preview.classList.remove('mobile-hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
   }

@@ -103,7 +103,7 @@ function downloadPDF() {
   const cleanName = candidateName.replace(/[^a-zA-Z0-9_-]/g, '_');
   const filename = `${cleanName}_Resume.pdf`;
 
-  showToast('PDF generate ho raha hai, kripya prateeksha karein...', 'info');
+  showToast('Generating resume PDF, please wait...', 'info');
 
   if (typeof html2pdf !== 'undefined') {
     const opt = {
@@ -117,11 +117,11 @@ function downloadPDF() {
 
     html2pdf().set(opt).from(paper).save()
       .then(() => {
-        showToast('PDF safaltapoorvak download ho gaya!', 'success');
+        showToast('Resume PDF downloaded successfully!', 'success');
       })
       .catch((err) => {
         console.error('html2pdf error:', err);
-        showToast('Direct download me samasya aayi. Print window khol rahe hain...', 'info');
+        showToast('Direct download encountered an issue. Opening print dialog...', 'info');
         window.print();
       });
   } else {
@@ -151,7 +151,7 @@ function exportJSON() {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 
-  showToast('Resume JSON backup download ho gaya!', 'success');
+  showToast('Resume backup exported successfully!', 'success');
 }
 
 // Import Resume from JSON File
@@ -164,12 +164,12 @@ function importJSON(file) {
       const parsed = JSON.parse(e.target.result);
       if (parsed && parsed.personal) {
         window.ResumeApp.loadData(parsed);
-        showToast('Resume data safaltapoorvak restore ho gaya!', 'success');
+        showToast('Resume data restored successfully!', 'success');
       } else {
         showToast('Invalid JSON file format.', 'error');
       }
     } catch (err) {
-      showToast('File read karne me truti hui. Valid JSON check karein.', 'error');
+      showToast('Error reading file. Please provide a valid JSON file.', 'error');
     }
   };
   reader.readAsText(file);
@@ -179,7 +179,7 @@ function importJSON(file) {
 function loadSampleData() {
   if (window.ResumeApp) {
     window.ResumeApp.loadData(JSON.parse(JSON.stringify(SAMPLE_RESUME_DATA)));
-    showToast('Professional Sample Resume data load kar diya gaya hai!', 'success');
+    showToast('Professional sample resume loaded successfully!', 'success');
   }
 }
 
@@ -187,7 +187,7 @@ function loadSampleData() {
 function saveUserResume() {
   const user = getCurrentUser();
   if (!user) {
-    showToast('Resume save karne ke liye kripya pehle Login karein.', 'info');
+    showToast('Please sign in to save your resume to your account.', 'info');
     openAuthModal('login');
     return;
   }
@@ -196,9 +196,9 @@ function saveUserResume() {
   const data = window.ResumeApp.data;
   try {
     localStorage.setItem(key, JSON.stringify(data));
-    showToast(`Resume "${user.name}" ke account me surakshit save ho gaya!`, 'success');
+    showToast(`Resume saved successfully to ${user.name}'s account!`, 'success');
   } catch (e) {
-    showToast('LocalStorage limit exceeded. Data save nahi ho paya.', 'error');
+    showToast('Storage limit exceeded. Unable to save resume data.', 'error');
   }
 }
 
@@ -211,7 +211,7 @@ function loadUserResume(userId) {
     if (raw) {
       const data = JSON.parse(raw);
       window.ResumeApp.loadData(data);
-      showToast('Aapka purana saved resume auto-load kar diya gaya hai.', 'info');
+      showToast('Your previously saved resume has been loaded.', 'info');
     }
   } catch (e) {
     console.error('Error loading user resume', e);
@@ -220,7 +220,7 @@ function loadUserResume(userId) {
 
 // Clear Resume Form
 function clearResumeData() {
-  if (confirm('Kya aap sach me resume ka sara data reset karna chahte hain?')) {
+  if (confirm('Are you sure you want to reset all resume data? This action cannot be undone.')) {
     const emptyData = {
       personal: {
         fullName: '',
@@ -241,6 +241,6 @@ function clearResumeData() {
       certifications: []
     };
     window.ResumeApp.loadData(emptyData);
-    showToast('Resume form clear kar diya gaya hai.', 'info');
+    showToast('Resume form has been reset.', 'info');
   }
 }

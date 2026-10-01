@@ -74,19 +74,19 @@ function registerUser(name, email, password) {
   email = email.trim().toLowerCase();
 
   if (!name || !email || !password) {
-    showToast('Kripya sabhi fields dhyan se bharein.', 'error');
+    showToast('Please fill in all required fields.', 'error');
     return false;
   }
 
   if (password.length < 6) {
-    showToast('Password kam se kam 6 characters ka hona chahiye.', 'error');
+    showToast('Password must be at least 6 characters long.', 'error');
     return false;
   }
 
   const users = getUsers();
   const exists = users.find(u => u.email === email);
   if (exists) {
-    showToast('Yeh email address pehle se registered hai! Kripya Sign In karein.', 'error');
+    showToast('This email is already registered. Please sign in instead.', 'error');
     return false;
   }
 
@@ -102,7 +102,7 @@ function registerUser(name, email, password) {
   saveUsers(users);
   setCurrentUser({ id: newUser.id, name: newUser.name, email: newUser.email });
 
-  showToast(`Swagat hai ${newUser.name}! Registration safal raha.`, 'success');
+  showToast(`Welcome, ${newUser.name}! Account created successfully.`, 'success');
   closeAuthModal();
   return true;
 }
@@ -112,7 +112,7 @@ function loginUser(email, password) {
   email = email.trim().toLowerCase();
   
   if (!email || !password) {
-    showToast('Email aur Password dono anivarya hain.', 'error');
+    showToast('Email and password are required.', 'error');
     return false;
   }
 
@@ -120,7 +120,7 @@ function loginUser(email, password) {
   const user = users.find(u => u.email === email && u.password === password);
 
   if (!user) {
-    showToast('Galat email ya password. Kripya punah prayas karein.', 'error');
+    showToast('Invalid email or password. Please try again.', 'error');
     return false;
   }
 
@@ -140,7 +140,7 @@ function loginUser(email, password) {
 function logoutUser() {
   const user = getCurrentUser();
   setCurrentUser(null);
-  showToast('Aap safaltapoorvak sign out ho gaye hain.', 'info');
+  showToast('You have been signed out successfully.', 'info');
   
   const dropdown = document.getElementById('userDropdown');
   if (dropdown) dropdown.classList.remove('show');
@@ -154,7 +154,7 @@ function loginDemoUser() {
   if (!demo) {
     demo = {
       id: 'user_demo_101',
-      name: 'Rahul Sharma',
+      name: 'Alex Morgan',
       email: 'demo@builder.com',
       password: 'password123',
       createdAt: new Date().toISOString()
@@ -164,7 +164,7 @@ function loginDemoUser() {
   }
 
   setCurrentUser({ id: demo.id, name: demo.name, email: demo.email });
-  showToast('Demo User Rahul Sharma ke rup me login hua!', 'success');
+  showToast('Signed in as Demo User (Alex Morgan).', 'success');
   closeAuthModal();
 
   // Load sample resume data if available

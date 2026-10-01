@@ -119,7 +119,7 @@ const ResumeTemplates = {
     return `
       <header class="resume-header">
         <div class="header-main">
-          <h1 class="resume-name">${this.escapeHTML(personal.fullName || 'Aapka Naam')}</h1>
+          <h1 class="resume-name">${this.escapeHTML(personal.fullName || 'Your Name')}</h1>
           <div class="resume-title">${this.escapeHTML(personal.jobTitle || 'Professional Title')}</div>
           <div class="contact-grid">
             ${contactItems.join('')}
