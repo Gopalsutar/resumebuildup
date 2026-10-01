@@ -318,3 +318,54 @@
   font-size: 11px;
   font-weight: 600;
 }
+
+/* ==========================================================================
+   TEMPLATE 4: SILICON TECH (Developer / Engineering Matrix)
+   ========================================================================== */
+.template-tech {
+  background: #ffffff;
+}
+
+.template-tech .tech-header {
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.template-tech .skill-chip {
+  background: #0f172a !important;
+  color: #38bdf8 !important;
+  font-family: monospace;
+}
+
+/* ==========================================================================
+   TEMPLATE 5: NORDIC SPLIT (2-Column Full Sidebar)
+   ========================================================================== */
+.template-split {
+  padding: 16mm 14mm !important;
+}
+
+/* ==========================================================================
+   TEMPLATE 6: APEX COMPACT (High Density 1-Page)
+   ========================================================================== */
+.template-compact {
+  padding: 14mm 14mm !important;
+}
+
+.template-compact .resume-bullets {
+  gap: 0.15rem;
+}
+
+/* ==========================================================================
+   TEMPLATE 7: OXFORD CLASSIC (Editorial Serif)
+   ========================================================================== */
+.template-classic {
+  font-family: 'Merriweather', 'Playfair Display', serif;
+  border: 1px solid #e2e8f0;
+}
+
+.template-classic .resume-header {
+  border-bottom: 3px double var(--resume-accent);
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+}
