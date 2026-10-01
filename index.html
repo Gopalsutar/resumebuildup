@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResumeCraft Pro - Modern Resume Builder & CV Maker</title>
+  <meta name="description" content="Build stunning, modern, ATS-friendly professional resumes in minutes with live real-time preview and instant PDF download. Built with pure HTML, CSS, and JavaScript.">
+  <meta name="keywords" content="resume builder, cv maker, ats resume, free resume generator, job application cv">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/templates.css">
+  <link rel="stylesheet" href="css/print.css">
+
+  <!-- html2pdf Library for Instant Client-Side PDF Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+  <!-- Top Application Navbar -->
+  <nav class="app-navbar" id="appNavbar">
+    <div class="brand-wrapper" id="brandLogo">
+      <div class="brand-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <line x1="10" y1="9" x2="8" y2="9"/>
+        </svg>
+      </div>
+      <div>
+        <span class="brand-title">ResumeCraft</span>
+        <span class="brand-badge">PRO</span>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <!-- Load Sample Data Button -->
+      <button type="button" class="btn btn-secondary btn-sm" id="loadSampleBtn" title="Pre-fill with realistic professional data">
+        ✨ Sample Data
+      </button>
+
+      <!-- Clear Data Button -->
+      <button type="button" class="btn btn-secondary btn-sm" id="clearFormBtn" title="Reset all form fields">
+        🧹 Reset
+      </button>
+
+      <!-- Theme Switcher -->
+      <button type="button" class="btn-icon" id="themeToggleBtn" aria-label="Toggle Theme" title="Theme change karein">
+        🌙
+      </button>
+
+      <!-- Auth State: Sign In Button (Shown when logged out) -->
+      <button type="button" class="btn btn-primary btn-sm" id="navAuthBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+          <polyline points="10 17 15 12 10 7"/>
+          <line x1="15" y1="12" x2="3" y2="12"/>
+        </svg>
+        Sign In / Register
+      </button>
+
+      <!-- Auth State: User Menu (Shown when logged in) -->
+      <div class="user-menu-wrapper" id="navUserMenu" style="display: none;">
+        <div class="user-badge" id="userBadge">
+          <div class="user-avatar" id="navUserAvatar">U</div>
+          <span class="user-name" id="navUserName">User</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+
+        <div class="user-dropdown" id="userDropdown">
+          <button type="button" class="dropdown-item" id="saveResumeBtn">
+            💾 Save Resume to Cloud
+          </button>
+          <div class="dropdown-divider"></div>
+          <button type="button" class="dropdown-item danger" id="logoutBtn">
+            🚪 Sign Out
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Dual-Pane Workspace -->
+  <main class="app-container">
+    
+    <!-- LEFT SIDE: Form Editor -->
+    <aside class="editor-sidebar" id="editorSidebar">
+      <div class="editor-header-bar">
+        <h2 class="editor-title">
+          <span>🛠️ Resume Builder</span>
+        </h2>
+        
+        <div class="quick-toolbar">
+          <button type="button" class="btn btn-secondary btn-sm" id="exportJsonBtn" title="Download data as JSON">
+            📤 Backup JSON
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" id="importJsonBtn" title="Upload data from JSON">
+            📥 Restore JSON
+          </button>
+          <input type="file" id="importFileInput" accept=".json" style="display: none;">
+        </div>
+      </div>
+
+      <!-- 1. PERSONAL INFORMATION SECTION -->
+      <div class="form-section-card active" id="secPersonal">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge">👤</div>
+            <div>
+              <div class="section-title">Personal Information</div>
+              <div class="section-subtitle">Basic details, contact & online profiles</div>
+            </div>
+          </div>
+          <span class="section-chevron">▼</span>
+        </div>
+        <div class="section-body">
+          <!-- Profile Avatar Upload -->
+          <div class="avatar-upload-box">
+            <img src="" id="avatarPreviewImg" class="avatar-preview-img" alt="Avatar">
+            <div style="flex: 1;">
+              <div style="font-size: 0.8125rem; font-weight: 600; margin-bottom: 0.35rem;">Profile Photo (Optional)</div>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <label for="avatarFileInput" class="btn btn-secondary btn-sm" style="cursor: pointer;">
+                  📷 Upload Photo
+                </label>
+                <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+                <button type="button" class="btn btn-secondary btn-sm" id="avatarRemoveBtn" style="color: var(--danger);">
+                  Hataayein
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="inputFullName">Full Name *</label>
+              <input type="text" id="inputFullName" class="form-input" placeholder="e.g. Rahul Sharma" autocomplete="name" required>
+            </div>
+            <div class="form-group">
+              <label for="inputJobTitle">Professional Title / Headline *</label>
+              <input type="text" id="inputJobTitle" class="form-input" placeholder="e.g. Full Stack Developer" required>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail">Email Address *</label>
+              <input type="email" id="inputEmail" class="form-input" placeholder="e.g. rahul@example.com" autocomplete="email" required>
+            </div>
+            <div class="form-group">
+              <label for="inputPhone">Phone Number</label>
+              <input type="tel" id="inputPhone" class="form-input" placeholder="e.g. +91 98765 43210" autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label for="inputLocation">City, State / Country</label>
+              <input type="text" id="inputLocation" class="form-input" placeholder="e.g. Mumbai, India">
+            </div>
+            <div class="form-group">
+              <label for="inputWebsite">Portfolio Website</label>
+              <input type="url" id="inputWebsite" class="form-input" placeholder="https://rahul.dev">
+            </div>
+            <div class="form-group">
+              <label for="inputLinkedIn">LinkedIn Profile</label>
+              <input type="url" id="inputLinkedIn" class="form-input" placeholder="https://linkedin.com/in/rahul">
+            </div>
+            <div class="form-group">
+              <label for="inputGitHub">GitHub Profile</label>
+              <input type="url" id="inputGitHub" class="form-input" placeholder="https://github.com/rahul">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. PROFESSIONAL SUMMARY SECTION -->
+      <div class="form-section-card" id="secSummary">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge">📝</div>
+            <div>
+              <div class="section-title">Professional Summary</div>
+              <div class="section-subtitle">2-4 impactful lines highlighting your career</div>
+            </div>
+          </div>
+          <span class="section-chevron">▼</span>
+        </div>
+        <div class="section-body">
+          <div class="form-group">
+            <label for="inputSummary">Career Summary / Objective</label>
+            <textarea id="inputSummary" class="form-textarea" rows="4" placeholder="Briefly describe your background, core strengths, and what value you bring..."></textarea>
+            <span class="form-input-help">Tip: Keep it concise, highlighting years of experience and top achievements.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. WORK EXPERIENCE SECTION -->
+      <div class="form-section-card" id="secExperience">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge">💼</div>
+            <div>
+              <div class="section-title">Work Experience</div>
+              <div class="section-subtitle">Employment history, roles & achievements</div>
+            </div>
+          </div>
+          <span class="section-chevron">▼</span>
+        </div>
+        <div class="section-body">
+          <div class="repeater-container" id="experienceContainer">
+            <!-- Dynamic items rendered via JS -->
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" id="addExperienceBtn" style="width: 100%;">
+            + Add Another Experience
+          </button>
+        </div>
+      </div>
+
+      <!-- 4. EDUCATION SECTION -->
+      <div class="form-section-card" id="secEducation">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge">🎓</div>
+            <div>
+              <div class="section-title">Education</div>
+              <div class="section-subtitle">Degrees, colleges & academic achievements</div>
+            </div>
+          </div>
+          <span class="section-chevron">▼</span>
+        </div>
+        <div class="section-body">
+          <div class="repeater-container" id="educationContainer">
+            <!-- Dynamic items rendered via JS -->
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" id="addEducationBtn" style="width: 100%;">
+            + Add Another Education
+          </button>
+        </div>
+      </div>
+
+      <!-- 5. SKILLS SECTION -->
+      <div class="form-section-card" id="secSkills">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge">🛠️</div>
+            <div>
+              <div class="section-title">Skills & Technologies</div>
+              <div class="section-subtitle">Technical skills, tools, frameworks & soft skills</div>
+            </div>
+          </div>
+          <span class="section-chevron">▼</span>
+        </div>
+        <div class="section-body">
+          <div class="skills-input-wrapper">
+            <div class="form-group">
+              <label for="skillInput">Skill Name (Type & press Enter or Comma)</label>
+              <div style="display: flex; gap: 0.5rem;">
+                <input type="text" id="skillInput" class="form-input" placeholder="e.g. JavaScript, React, Python, Docker">
+                <button type="button" class="btn btn-primary btn-sm" id="addSkillBtn">Add</button>
+              </div>
+            </div>
+            <div class="skills-tags-container" id="skillsTagsContainer">
+              <!-- Dynamic skill chips rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. PROJECTS SECTION -->
+      <div class="form-section-card" id="secProjects">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge">🚀</div>
+            <div>
+              <div class="section-title">Projects</div>
+              <div class="section-subtitle">Key personal, freelance, or open-source projects</div>
+            </div>
+          </div>
+          <span class="section-chevron">▼</span>
+        </div>
+        <div class="section-body">
+          <div class="repeater-container" id="projectsContainer">
+            <!-- Dynamic items rendered via JS -->
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" id="addProjectBtn" style="width: 100%;">
+            + Add Another Project
+          </button>
+        </div>
+      </div>
+
+      <!-- 7. CERTIFICATIONS SECTION -->
+      <div class="form-section-card" id="secCertifications">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge">🏆</div>
+            <div>
+              <div class="section-title">Certifications & Awards</div>
+              <div class="section-subtitle">Accreditations, courses & milestones</div>
+            </div>
+          </div>
+          <span class="section-chevron">▼</span>
+        </div>
+        <div class="section-body">
+          <div class="repeater-container" id="certificationsContainer">
+            <!-- Dynamic items rendered via JS -->
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" id="addCertBtn" style="width: 100%;">
+            + Add Another Certification
+          </button>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- RIGHT SIDE: Live Resume Preview Canvas -->
+    <section class="preview-panel" id="previewPanel">
+      
+      <!-- Preview Sticky Toolbar -->
+      <div class="preview-sticky-header">
+        
+        <!-- Template Selection -->
+        <div class="template-selector-group">
+          <span style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Template:</span>
+          <button type="button" class="template-btn active" data-template="modern">Modern Clean</button>
+          <button type="button" class="template-btn" data-template="executive">Executive Elite</button>
+          <button type="button" class="template-btn" data-template="creative">Creative Minimal</button>
+        </div>
+
+        <!-- Color Palette Picker -->
+        <div class="color-picker-group">
+          <span style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Color:</span>
+          <span class="color-dot active" data-color="#2563eb" style="background: #2563eb;" title="Sapphire Blue"></span>
+          <span class="color-dot" data-color="#059669" style="background: #059669;" title="Emerald Teal"></span>
+          <span class="color-dot" data-color="#7c3aed" style="background: #7c3aed;" title="Royale Violet"></span>
+          <span class="color-dot" data-color="#dc2626" style="background: #dc2626;" title="Crimson Rose"></span>
+          <span class="color-dot" data-color="#334155" style="background: #334155;" title="Midnight Slate"></span>
+          <span class="color-dot" data-color="#d97706" style="background: #d97706;" title="Warm Amber"></span>
+        </div>
+
+        <!-- Print & PDF Download Actions -->
+        <div class="preview-export-group">
+          <button type="button" class="btn btn-secondary btn-sm" id="printResumeBtn" title="Browser Print (Ctrl+P)">
+            🖨️ Print
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" id="downloadPdfBtn" title="Download direct PDF file">
+            📥 Download PDF
+          </button>
+        </div>
+
+      </div>
+
+      <!-- A4 Paper Representation Canvas -->
+      <div class="resume-paper-wrapper">
+        <div class="resume-paper template-modern" id="resumePaper">
+          <!-- Real-time rendered resume contents -->
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Mobile View Toggle (Edit vs Preview for small screens) -->
+  <div class="mobile-view-toggle" id="mobileViewToggle">
+    <button type="button" class="mobile-toggle-btn active" id="mobileToggleEdit">✏️ Edit Form</button>
+    <button type="button" class="mobile-toggle-btn" id="mobileTogglePrev">👁️ Live Preview</button>
+  </div>
+
+  <!-- AUTHENTICATION MODAL (Registration & Login) -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Account Portal</h3>
+        <button type="button" class="modal-close-btn" id="authModalClose" aria-label="Close Modal">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <!-- Switch between Login & Register tabs -->
+        <div class="auth-tabs">
+          <button type="button" class="auth-tab-btn active" id="tabBtnLogin">Sign In</button>
+          <button type="button" class="auth-tab-btn" id="tabBtnRegister">Create Account</button>
+        </div>
+
+        <!-- SIGN IN FORM -->
+        <form class="auth-form active" id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" class="form-input" placeholder="aapka@email.com" autocomplete="username" required>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <div class="password-input-wrap">
+              <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" autocomplete="current-password" required>
+              <button type="button" class="password-toggle-btn" title="Toggle password visibility">👁️</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
+            Sign In Karo
+          </button>
+
+          <!-- Quick Demo User Login Box -->
+          <div class="demo-account-box">
+            <div>
+              <div class="demo-account-text" style="font-weight: 700;">Direct Demo Test:</div>
+              <div class="demo-account-text">demo@builder.com | password123</div>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="demoLoginBtn">
+              ⚡ 1-Click Demo Login
+            </button>
+          </div>
+        </form>
+
+        <!-- REGISTRATION FORM -->
+        <form class="auth-form" id="registerForm">
+          <div class="form-group">
+            <label for="regName">Full Name</label>
+            <input type="text" id="regName" class="form-input" placeholder="e.g. Rahul Sharma" autocomplete="name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="regEmail">Email Address</label>
+            <input type="email" id="regEmail" class="form-input" placeholder="aapka@email.com" autocomplete="username" required>
+          </div>
+
+          <div class="form-group">
+            <label for="regPassword">Create Password</label>
+            <div class="password-input-wrap">
+              <input type="password" id="regPassword" class="form-input" placeholder="At least 6 characters" autocomplete="new-password" minlength="6" required>
+              <button type="button" class="password-toggle-btn" title="Toggle password visibility">👁️</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
+            Create Free Account
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
