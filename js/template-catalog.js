@@ -430,17 +430,30 @@ const TemplateCatalogApp = {
     const modal = document.getElementById('templatePreviewModal');
     if (!modal) return;
 
-    document.getElementById('modalTplTitle').textContent = tpl.name;
-    document.getElementById('modalTplBadge').textContent = tpl.badge;
-    document.getElementById('modalTplMeta').textContent = `Category: ${tpl.category.toUpperCase()} • Layout: ${tpl.layout.toUpperCase()} • ATS Score: ${tpl.atsScore}%`;
+    const titleEl = document.getElementById('modalTplTitle');
+    const badgeEl = document.getElementById('modalTplBadge');
+    const metaEl = document.getElementById('modalTplMeta');
+
+    if (titleEl) titleEl.textContent = tpl.name;
+    if (badgeEl) {
+      badgeEl.textContent = tpl.badge;
+      badgeEl.style.backgroundColor = tpl.colorHex;
+    }
+    if (metaEl) {
+      metaEl.textContent = `Category: ${tpl.category.toUpperCase()} • Layout: ${tpl.layout.toUpperCase()} • ATS Score: ${tpl.atsScore}% • Font: ${tpl.fontName || tpl.font}`;
+    }
 
     const previewPaper = document.getElementById('modalPreviewPaper');
-    if (previewPaper && window.ResumeTemplates && window.ResumeApp) {
+    if (previewPaper && window.ResumeTemplates) {
+      const resumeData = (window.ResumeApp && window.ResumeApp.data && window.ResumeApp.data.personal && window.ResumeApp.data.personal.fullName)
+        ? window.ResumeApp.data
+        : (typeof SAMPLE_RESUME_DATA !== 'undefined' ? SAMPLE_RESUME_DATA : { personal: { fullName: 'Alex Morgan' }, experience: [], education: [], skills: [] });
+
       previewPaper.className = `resume-paper template-${tpl.layout}`;
       previewPaper.style.setProperty('--resume-accent', tpl.colorHex);
       previewPaper.style.setProperty('--resume-accent-light', tpl.colorLight);
       previewPaper.style.setProperty('--resume-font', `'${tpl.font}', sans-serif`);
-      previewPaper.innerHTML = window.ResumeTemplates.render(window.ResumeApp.data);
+      previewPaper.innerHTML = window.ResumeTemplates.render(resumeData);
     }
 
     const selectBtn = document.getElementById('modalSelectTplBtn');
@@ -449,11 +462,19 @@ const TemplateCatalogApp = {
     }
 
     modal.classList.add('open');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+
+    // Scroll modal body to top
+    const modalBody = modal.querySelector('.template-modal-preview-body');
+    if (modalBody) modalBody.scrollTop = 0;
   },
 
   closeModal() {
     const modal = document.getElementById('templatePreviewModal');
-    if (modal) modal.classList.remove('open');
+    if (modal) {
+      modal.classList.remove('open');
+    }
+    document.body.style.overflow = ''; // Restore page scrolling
   }
 };
 
@@ -462,7 +483,35 @@ window.TemplateCatalogApp = TemplateCatalogApp;
 document.addEventListener('DOMContentLoaded', () => {
   TemplateCatalogApp.init();
 
-  // Close preview modal button
+  // Close preview modal button (X icon in header)
   const closeBtn = document.getElementById('modalPreviewClose');
-  if (closeBtn) closeBtn.addEventListener('click', () => TemplateCatalogApp.closeModal());
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => TemplateCatalogApp.closeModal());
+  }
+
+  // Close preview modal button (footer button)
+  const footerCloseBtn = document.getElementById('modalFooterCloseBtn');
+  if (footerCloseBtn) {
+    footerCloseBtn.addEventListener('click', () => TemplateCatalogApp.closeModal());
+  }
+
+  // Backdrop overlay click to close
+  const previewModalEl = document.getElementById('templatePreviewModal');
+  if (previewModalEl) {
+    previewModalEl.addEventListener('click', (e) => {
+      if (e.target === previewModalEl) {
+        TemplateCatalogApp.closeModal();
+      }
+    });
+  }
+
+  // Keyboard 'Escape' key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.key === 'Esc') {
+      const modal = document.getElementById('templatePreviewModal');
+      if (modal && modal.classList.contains('open')) {
+        TemplateCatalogApp.closeModal();
+      }
+    }
+  });
 });
